@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
   // Establishing base key, adding appendage to key
   char *defaultKey = argc == 4 ? argv[2] : "I like habamax colorscheme";
   strcat(strcat(keybuff, defaultKey), "NuLlIsHcyPHER");
-  fp = argc == 4 ? fopen(argv[3], "r") : fopen(argv[2], "r");
+  fp = fopen(argc == 4 ? argv[3] : argv[2], "r");
 
   // No file found
   if (fp == NULL) {

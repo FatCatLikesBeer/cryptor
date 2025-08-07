@@ -1,4 +1,8 @@
+#include "helpers.h"
+#include <ranlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void print_help(void) {
   printf("Example:\n");
@@ -37,4 +41,17 @@ int str_match(char *str1, char *str2) {
   }
 
   return 1;
+}
+
+char *salt_generate(void) {
+  char *result = malloc(sizeof(char[SALT_LENGTH + 5]));
+  int index = 0;
+  srand(time(NULL));
+
+  while (index < SALT_LENGTH) {
+    result[index++] = MIN + rand() % (MAX - MIN + 1);
+  }
+
+  result[SALT_LENGTH] = '\0';
+  return result;
 }

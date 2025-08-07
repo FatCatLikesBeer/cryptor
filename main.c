@@ -37,8 +37,9 @@ int main(int argc, char *argv[]) {
   }
 
   // Key length too long
-  if ((sizeof &argv[2] / sizeof argv[2][0])) {
-    printf("Key length too long, limit 100 chars\n");
+  int custom_key_length = strlen(argv[2]);
+  if (99 < custom_key_length) {
+    printf("Key length of %d too long, limit 100 chars\n", custom_key_length);
     return 0;
   }
 

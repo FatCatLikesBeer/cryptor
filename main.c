@@ -41,17 +41,24 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+  // Key length too long
+  if ((sizeof &argv[2] / sizeof argv[2][0])) {
+    printf("Key length too long, limit 100 chars\n");
+    return 0;
+  }
+
   // Establishing base key, adding appendage to key
   char *defaultKey = argc == 4 ? argv[2] : "I like habamax colorscheme";
   strcat(strcat(keybuff, defaultKey), "NuLlIsHcyPHER");
   fp = argc == 4 ? fopen(argv[3], "r") : fopen(argv[2], "r");
 
+  // No file found
   if (fp == NULL) {
     printf("No file found!\n");
     return 1;
   }
 
-  // Cypher logic
+  // Cypher logic && stream ouput
   if ('e' == flag[1]) {
     while ((buff = fgetc(fp)) != EOF) {
       buff = buff + key_oscillator(keybuff, osc_index);

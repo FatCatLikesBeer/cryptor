@@ -1,6 +1,6 @@
 #Cryptor
 
-A text encryption/decryption utility
+A text encryption/decryption utility using Vigenère cipher.
 
 ```
 >_ cryptor -h                             # output help

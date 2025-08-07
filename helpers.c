@@ -11,13 +11,15 @@ void print_help(void) {
   printf(">_ cryptor -h # prints this help message\n");
 }
 
-int key_oscillator(char *key, int tracker) {
-  if ('0' == key[tracker])
-    tracker = 0;
-  return (int)key[tracker++];
+int key_oscillator(char *key, int *tracker) {
+  int result;
+  if ('\0' == key[*tracker])
+    *tracker = 0;
+  result = (int)key[*tracker];
+  (*tracker)++;
+  return result;
 }
 
-// Returns 0 input strings do not match
 int str_match(char *str1, char *str2) {
   int index = 0;
   while (str1[index] != '\0') {

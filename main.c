@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]) {
   FILE *fp;
   char keybuff[256], *flag;
-  int osc_index = 0, buff;
+  int osc_index = 0, *p_osc_index = &osc_index, buff;
 
   keybuff[0] = '\0';
   flag = argv[1];
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
   // Establishing base key, adding appendage to key
   char *defaultKey = argc == 4 ? argv[2] : "I like habamax colorscheme";
-  strcat(strcat(keybuff, defaultKey), "NuLlIsHcyPHER");
+  strcat(keybuff, defaultKey);
   fp = fopen(argc == 4 ? argv[3] : argv[2], "r");
 
   // No file found
@@ -57,12 +57,12 @@ int main(int argc, char *argv[]) {
   // Cypher logic && stream ouput
   if ('e' == flag[1]) {
     while ((buff = fgetc(fp)) != EOF) {
-      buff = buff + key_oscillator(keybuff, osc_index);
+      buff = buff + key_oscillator(keybuff, p_osc_index);
       printf("%c", buff);
     }
   } else if ('d' == flag[1]) {
     while ((buff = fgetc(fp)) != EOF) {
-      buff = buff - key_oscillator(keybuff, osc_index);
+      buff = buff - key_oscillator(keybuff, p_osc_index);
       printf("%c", buff);
     }
   }

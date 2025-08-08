@@ -1,4 +1,4 @@
-#Cryptor
+# Cryptor
 
 A text encryption/decryption utility using salted keys and bitwise Vigenère cipher.
 

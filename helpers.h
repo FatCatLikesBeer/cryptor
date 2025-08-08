@@ -14,5 +14,5 @@ int str_match(char *str1, char *str2);
 /// Prints out help text
 void print_help(void);
 
-// Generate Salt
+// Returns a char* to a salt of SALT_LENGTH length
 char *salt_generate(void);

@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[]) {
   FILE *fp;
-  char keybuff[256], *flag;
+  char keybuff[256], *flag, *file_name;
   int osc_index = 0, *p_osc_index = &osc_index, buff;
 
   keybuff[0] = '\0';
@@ -15,17 +15,17 @@ int main(int argc, char *argv[]) {
   // Print help and exit
   if (argc < 2) {
     print_help();
-    return 0;
+    return 1;
   }
   if (str_match("-h", flag) || str_match("--help", flag)) {
     print_help();
-    return 0;
+    return 1;
   }
   if (!str_match("-e", flag) && !str_match("-d", flag) &&
       !str_match("--encrypt", flag) && !str_match("--decrypt", flag)) {
     printf("Invalid option: %s\n", flag);
     print_help();
-    return 0;
+    return 1;
   }
 
   // Options are valid, but command count is not
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     printf("3-4 arguemnts required\n"
            ">_ cryptor <option> <key> <file_location>\n");
     print_help();
-    return 0;
+    return 1;
   }
 
   // Key length too long
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
   if (KEYLIMIT < custom_key_length) {
     printf("Key length of %d too long, limit %d chars\n", custom_key_length,
            KEYLIMIT);
-    return 0;
+    return 1;
   }
 
   // Establish defaultKey
@@ -52,9 +52,10 @@ int main(int argc, char *argv[]) {
                                  "iT Is aLsO AvAiLaBlE In vAnIlLa nViM!";
 
   // No file found
-  fp = fopen(argc == 4 ? argv[3] : argv[2], "r");
+  file_name = argc == 4 ? argv[3] : argv[2];
+  fp = fopen(file_name, "r");
   if (fp == NULL) {
-    printf("No file found!\n");
+    printf("No file found! -> %s\n", file_name);
     return 1;
   }
 
@@ -62,7 +63,7 @@ int main(int argc, char *argv[]) {
   if ('e' == flag[1]) {
     // Salt key
     salt = salt_generate();
-    strcat(strcat(keybuff, salt), defaultKey);
+    strcat(strcat(keybuff, defaultKey), salt);
 
     // Output result
     printf("%s", salt);
@@ -82,7 +83,7 @@ int main(int argc, char *argv[]) {
 
     salt = &salt_buff[0];
 
-    strcat(strcat(keybuff, salt), defaultKey);
+    strcat(strcat(keybuff, defaultKey), salt);
 
     while ((buff = fgetc(fp)) != EOF) {
       buff = buff ^ key_oscillator(keybuff, p_osc_index);

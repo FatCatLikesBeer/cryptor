@@ -6,13 +6,13 @@
 
 void print_help(void) {
   printf("Example:\n");
-  printf(">_ cryptor -e|-d <symetric_key> ./file_to_be_processed.txt # "
-         "Output printeds to stdout\n");
+  printf(">_ cryptor -e|-d <symetric_key> ./file_to_be_processed.txt"
+         "\t\t\t# Output prints to stdout\n");
   printf(">_ cryptor -e encryptionKey ./to_be_encrypted.txt > "
-         "./encrypted_output.txt # Saves output to file\n");
+         "./encrypted_output.txt \t# Saves output to file\n");
   printf(">_ cryptor -d encryptionKey ./to_be_decrypted.txt > "
-         "./decrypted_output.txt # Saves output to file\n");
-  printf(">_ cryptor -h # prints this help message\n");
+         "./decrypted_output.txt \t# Saves output to file\n");
+  printf(">_ cryptor -h \t\t\t\t\t\t\t\t\t# Prints this help message\n");
 }
 
 int key_oscillator(char *key, int *tracker) {
